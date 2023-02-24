@@ -1,0 +1,62 @@
+Dear Team
+ 
+We discussed following points and whether these are feasible using MULE and if feasible which product to use. If not feasible, Can I develop my own application and whether we can integrate as part of the Mule ecosystems.
+ 
+1.       Can department raise the request for accessing the API through online application.
+
+—The request can be raised from Exchange portal. Once approved, the application can start accessing the api using the unique credentials.
+
+
+2.       Is there any process of verifier and approve methodology based on the request made for each request.
+
+—Request and verification can be done per app basis at the start. Once application is approved to access the api, it can do so using the credentials that are generated. if wrong credentials are provided, access requests are not processed.
+
+3.       Can I create the unique identifier for each client/consumer application based on the approval of above request.
+
+— yes this one of the primary steps for accessing an API.
+
+4.       Can I select the output ( fields or columns ) of different API based on the request of consumer department and enable only those fields.
+
+— yes this can be done using the API led connectivity.
+
+5.       Can I assign schedule ( Date/Time for access ) for each of the API with respect to each of the consumer Department.
+
+—  if referring to scheduler based applications for batch processing etc, then this is definitely possible.
+
+6.       Can I encrypt the data on the go and can I create separate encryption key and decryption key for each of the department.
+
+— yes various encryption techniques are available.
+
+7.       Can I have key rotation policy on expiry for encryption / decryption key.
+
+— this depends on organizations policy, Mulesoft can work with such policies
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+These are only management of Consumers and providers, kindly verify whether API Manager or Governance
+ 
+Following are the requirements from API Manager and Governance.
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+
+1.       What are the other features which not present in the above list. Can we write some use case where we need these features based on the current understand of departments.
+
+—        As per the current understanding the above features are enough, if needed we can write based on the use case.  
+
+2.       What the features available as part of API Manager/Governance which are currently available as part of the basic installation. Which of the features which can be costume built.
+
+— various policies of governing access to the APIs can be custom built. if the policies provided by Mulesoft are not sufficient, customers can create their own policies n have then applied on the API gateway
+
+3.       Whether API Manager/Governance can be on Prime or is it always cloud.
+
+— can exist on premise as well. But all the maintenance related activities like updates etc will have to be taken care of by customer in case they plan to go for having api manager on-premise. 
+ 
+Regarding the deployment and design
+ 
+1.       What are mandatory requirement whether our deployment is minimal which is provided by API Manager/Governance.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+

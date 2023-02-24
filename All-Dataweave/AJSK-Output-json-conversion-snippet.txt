@@ -1,0 +1,6 @@
+
+Dw Script: For Reading Ajsk-Data-And Transfrom :
+%dw 2.0
+output application/json
+---
+read((payload.body.GetXmlDataWoDSCVResponse.GetXmlDataWoDSCVResult.SMSWSOP.xmlData), 'application/xml')

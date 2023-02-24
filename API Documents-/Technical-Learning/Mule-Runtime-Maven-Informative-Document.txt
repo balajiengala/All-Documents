@@ -1,0 +1,34 @@
+Mule Maven Plugin Goals
+
+The Mule Maven plugin has three goals:
+
+package->
+Generates the jar file for your project.
+
+deploy->
+Automatically uploads and starts your application in any of the application deployment targets (CloudHub, Runtime Fabric, or On-Premises).
+
+mule:deploy->
+Deploys an artifact from the specified location.
+
+mule:undeploy->
+Automatically removes your application from any of the application deployment targets (CloudHub, Runtime Fabric, or On-Premises).
+
+Each goal accepts parameters that are unique to the desired plugin behavior. To provide a parameter from the command line, prepend -D to the parameter name.
+
+
+ReferenceLink:  
+
+https://docs.mulesoft.com/mule-runtime/4.4/mmp-concept#:~:text=The%20Mule%20Maven%20plugin%20enables%20you%20to%20integrate,%28Enterprise%20Edition%29%20and%20with%20Mule%20Kernel%20%28Community%20Edition%29.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+POM.xml ->
+
+The pom.xml file contains the core information about a project and its configuration details including its dependencies, build directory, source directory, test source directory, plugin, goals etc. Maven reads the pom.xml file, then executes the goal. In Mule-4 all projects are 'mavenised' by default.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+

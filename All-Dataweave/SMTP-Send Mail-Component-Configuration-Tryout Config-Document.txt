@@ -1,0 +1,22 @@
+The Send Mail- SMTP Component in the Mule 4, Detailed usage for Outlook:
+
+This Text Document is a Tryout Plan Document for sending the Mails via Outlook:
+CEG-MuleUsage Purpose...
+
+1.The IT team who provides the Outlook Accounts for the user, is the one who provides us the following information
+
+Host: The host code where the outlook is hosted.
+
+port: The port where the outlook application is hosted.
+
+username:  1.This is the username of the EmailServer/2.Test Mail-id username (Yet to Confirm with the either one of the usecase during performing the POC)
+
+Password: 1.This is the password of the EmailServer/2.Test Mail-id Password (Yet to Confirm with the either one of the usecase during performing the POC)
+
+From-Mailid: is the Test Mail-ID created by the IT team.
+
+To-Mailid: is the Maild-Id's of the outlook user's who are all hosted on the same server. 
+
+
+
+

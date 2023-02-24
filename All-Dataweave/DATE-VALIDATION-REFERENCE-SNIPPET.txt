@@ -1,0 +1,33 @@
+input:
+
+{
+    "startdate": "2022-12-05",
+    "EndDate": "2022-12-15",
+    "MY_DATE": "2022-12-14"
+}
+
+Script:
+
+%dw 2.0
+output application/json
+var nowdate = payload.MY_DATE
+var fixedEndDate = payload.EndDate
+var fixedStartDate= payload.startdate
+ 
+fun checkDate(nowdate) =  if((nowdate as Date{format : "yyyy-MM-dd"} >= fixedStartDate) 
+                            and (nowdate as Date{format : "yyyy-MM-dd"} <= fixedEndDate))
+                            "true" else "false"                    
+---
+{
+    Check : checkDate(nowdate),
+    currentDay: (now() >> 'IST') as Date{format: "yyyy-MM-dd"}
+    //in the previous(Before)step itself please do convert the currentDay with the above single line ...so that you can format as how it can be inputted according to the next step.
+}
+
+output:
+
+
+{
+  "Check": "true",
+  "currentDay": "2022-12-12"
+}

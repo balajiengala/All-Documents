@@ -1,0 +1,42 @@
+steps followed during encrypting the json payload using cryptographic techniques:
+
+-> Download the cryptography module from exchange.
+-> All the components of the module can be seen.
+-> Since we are using password based encryption select the "crypto-encrypt-pbe" and "crypto-decrypt-pbe" component.
+   A default Algorithm is generated in the component if you want to use other Alogrithms you can use,
+   but the thing is you need to use the same Algorithm and password while DECRYPTION also.
+-> Password  will be defined in the password attribute slot.
+-> Main thing to remember is the Algorithm and the pasword which you use during the encryption, the same 
+   is used while decryption also.
+
+
+encryption flow:
+
+
+
+  Jce encrypt pbe component----------------->logger after encryption---------------->Transfrom-Message
+                                                                             dw-script:
+                                                                                      %dw 2.0
+                                                                                      import dw::Crypto
+                                                                                      import toBase64::core::Binaries
+                                                                                      output application/json
+                                                                                      ---
+                                                                                      toBase64(payload)
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+decryption flow:
+
+
+
+  Transfrom-Message--------------------------->Jce decrypt pbe component------------------------>logger after decryption
+  dw-script:
+      %dw 2.0
+      import fromBase64::core::Binaries
+      output application/octet-stream
+      ---
+      fromBase(payload)
+
+------------------------------------------------------------------------------------------------------------------------------
+      

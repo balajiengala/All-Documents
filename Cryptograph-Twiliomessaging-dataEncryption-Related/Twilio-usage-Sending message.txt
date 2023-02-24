@@ -1,0 +1,39 @@
+Twilio send message Operation successfully Done---:)
+
+---->>Points to be remembered before performing the test::::
+
+1. Make Sure the calleriD/"TO"-Number for which you are sending the message is added(regsitered and verified) in your Twilio Account.
+
+2.Only the registered numbers can only get the message, for that an OTP verification process goesOn from twilio.
+
+3.From AnypointStudio ADD the Twilio module from the Exchange.
+
+4.Suppose the Component is Create message:
+     
+  a.Before that event drag and drop a transform message:--->>
+
+ %dw 2.0
+output application/x-www-form-urlencoded
+---
+{
+	From: "+12055761239",
+	To: "+919110758466",
+	Body: "HI THIS IS MUlE-ESB-DEVELOPER"
+}
+
+From number: defines the twilio number from which the message comes.
+To number: defines the registered(registered and verified in your Twilio Account) number to whom the message should be sent.
+Body: Defines the content of the message which you are supposed to send to that registered sender.
+
+
+------------------------------------------------------------------------------------------------------------------------------
+
+Twilio-create message component
+
+-> Give AccountSID, and Account password as
+AC5766c35d9f7648247ac73598061f50e1---- twilio userid
+e0520a2c0cb3cd95197771881ba8a859----password
+
+
+After Configuring twilio is ready to send the message.
+----------------------------------------------------------------------------------------------------------------------------

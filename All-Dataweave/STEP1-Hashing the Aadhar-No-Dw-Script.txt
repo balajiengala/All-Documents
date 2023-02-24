@@ -1,0 +1,8 @@
+%dw 2.0
+import dw::Crypto
+import * from dw::core::Binaries
+output application/json
+---
+{
+ "hashCode": upper(toHex(Crypto::hashWith(payload.AadharNumber as Binary, "SHA-256") as Binary))
+}

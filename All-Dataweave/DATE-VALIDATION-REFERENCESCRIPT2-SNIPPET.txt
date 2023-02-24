@@ -1,0 +1,68 @@
+%dw 2.0
+var A = payload.ClientCode
+var B = payload.Aadhar_No
+var StartTime = "16:36:00" as Time
+var EndTime = "20:00:00" as Time
+var StartDate= "2022-12-22" as Date{format: "yyyy-MM-dd"}
+var EndDate= "2022-12-22" as Date{format: "yyyy-MM-dd"}
+var Nowdate= ((now()>> "IST") [0 to 9]) as Date{format: "yyyy-MM-dd"}
+fun DateValidator(Nowdate)= if (Nowdate >= StartDate  and Nowdate <= EndDate) "True" else "False"
+var ExactNowTime1 = (((now()>> "IST") [11 to 18]) as Time)
+var ExactNowTime2 = ((substring((now() >> "IST"), 11, 19)) as Time)
+fun check(ExactNowTime1)= if (ExactNowTime1 >= StartTime  and ExactNowTime1 <= EndTime) "True" else "False"
+output application/json
+import * from dw::core::Strings
+---
+{
+    way1: substring(A, 2,6),
+    way2: A [2 to 5],
+    lastvalue: B last 10,
+    Randomuuid: uuid(),
+    randomNumber:  random() last 4,
+    IndainStandardTimeWay1: (substring((now() >> "IST"), 11, 19)) as Time,
+    IndainStandardTimeway2: ((now()>> "IST") [11 to 18]) as Time,
+    ExactNow1: ExactNowTime1,
+    ExactNow2: ExactNowTime2,
+    checkStartime: StartTime,
+    checckEndtime:  EndTime,
+    ValidateTheTimeWay1:  if (((substring((now() >> "IST"), 11, 19)) as Time) >= StartTime  and ((substring((now() >> "IST"), 11, 19)) as Time) <= EndTime) "True" else "False",
+    ValidateTheTimeWay2:  if((((now()>> "IST") [11 to 18]) as Time) >= StartTime and (((now()>> "IST") [11 to 18]) as Time) <= EndTime) "True" else "False",
+    DateTodayIST1:  ((now()>> "IST") [0 to 9]) as Date,
+    DateTodayIST2: substring((now() >> "IST"), 0, 10) as Date,
+    currentdatefromVariableContainer: Nowdate,
+    TimeChecking: check(ExactNowTime1),
+    DateChecking: DateValidator(Nowdate),
+    "\$TryingDollar1": A,
+    "\$TyingDollar2": B
+}
+
+
+
+
+
+
+OUTPUT: 
+
+
+{
+  "way1": "6393",
+  "way2": "6393",
+  "lastvalue": "09d33cc374",
+  "Randomuuid": "abc650e5-d61d-4f01-89ed-984cc34b89d5",
+  "randomNumber": "6298",
+  "IndainStandardTimeWay1": "17:16:53Z",
+  "IndainStandardTimeway2": "17:16:53Z",
+  "ExactNow1": "17:16:53Z",
+  "ExactNow2": "17:16:53Z",
+  "checkStartime": "16:36:00Z",
+  "checckEndtime": "20:00:00Z",
+  "ValidateTheTimeWay1": "True",
+  "ValidateTheTimeWay2": "True",
+  "DateTodayIST1": "2022-12-22",
+  "DateTodayIST2": "2022-12-22",
+  "currentdatefromVariableContainer": "2022-12-22",
+  "TimeChecking": "True",
+  "DateChecking": "True",
+  "$TryingDollar1": "1963936142",
+  "$TyingDollar2": "1783563f2e47d786d758933a0f766ab286aca5e25506563ac3cf1509d33cc374"
+}

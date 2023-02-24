@@ -1,0 +1,34 @@
+This Document gives the Basic overview of the IBM-MQ usage in the mulesoft:
+
+IBM-MQ is one of  Message Queing Service similar to other queing services like JMS-Apache-ActiveMq.
+The Main purpose of this Queing services are publishing the message to a queue or a Topic/exchange
+and consume the message(Data) where-ever necessary in the inter and intra-Application level.
+
+Below are the Mandatory configurations for the IBM-Mq
+
+host=
+port=
+queuename=
+queuemanager=
+channel=
+username=
+password=
+
+All the Above configuration details will be provided my the IBM-Mq team of the Organisation.
+
+-> Just as JMS-services we have messaging operations like
+
+   publish, publish-Consume, onNew-Message(source-connector), consume
+
+By default we wont be able to see the IBM-MQ module in the mule pallete
+we have to import it from the exchange.
+
+like all the other messaging servies, the IBM_MQ also performs the similar operations.
+
+The Data from the upstream systems are captured and sent to the various destination queues or topics.
+
+Refer Mulesoft Documentation for more information.
+
+
+
+

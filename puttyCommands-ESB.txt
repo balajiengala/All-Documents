@@ -1,0 +1,45 @@
+PuttyCommands:::::::::::::::
+
+Ce3U$er@5910 ---> ceguserPassword
+
+cd /home/ceguser ----> command to enter into ceguser
+
+cd $MULE_HOME ---->command to enter MULE_HOME path
+
+sudo $MULE_HOME/bin/mule restart  ----------->command to restart the muleStandaloneServer
+
+
+----------------------------------------------------------------------------------------------------
+This is how through Putty we can connect to our servers.
+
+-> Open Putty
+-> After opening Putty we can see the
+   Host: 10.10.29.243  (eg: Define the server host which you want to connect Connection type will be: SSH)
+   port: 22
+   Click on Open.
+Now putty command prompt is opened.
+->Login as: ceguser
+
+(it asks ceguser@10.10.29.243's password) 
+
+->ceguser@10.10.29.243's password: Ce3U$er@5910  (press enter)
+-> Now type cd /home/ceguser   (press enter and press ll enter)
+-> Now type cd $MULE_HOME enter (press enter and press ll enter. This will take you to the home path) 
+
+if you want to switch to the apps path then the command is:
+
+-> cd $MULE_HOME/apps (press enter and press ll)we can see all the apps which are running on the server.
+
+if you want to restart the server then the command is:
+
+-> sudo $MULE_HOME/bin/mule restart (press enter and again the cmd asks for password: give the same)
+
+password: Ce3U$er@5910
+
+The server restarts now;;;;;
+
+reconfirm it by checking the apps
+
+cd $MULE_HOME/apps (press enter and press ll enter.....u can see apps which are upon running)
+
+-----------------------------------------------------------------------------------------------------------

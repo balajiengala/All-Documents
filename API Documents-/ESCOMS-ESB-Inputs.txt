@@ -1,0 +1,59 @@
+BESCOM-RAPDRP-APi:
+
+{
+  "customerID": "1011312222",
+  "PayMonth": "2022-12",
+  "ClientSecretCode": "1909511"
+}
+
+-----------------------------------------------------
+CESC-FetchSubsidy Eligibility:
+
+Authorization: Cesc@PaymentAPI2021+
+
+{
+  "customer_id": "1011312222",
+  "BillDate": "2022-11",
+  "UserCode": "DBT",
+  "ClientSecretCode": "1909511"  
+}
+
+-------------------------------------------------------
+Gescom-FreePowerSupplyRebateData:
+
+
+{
+    "customer_id": "1011312222",
+    "YearMonth": "2022-12",
+    "ClientSecretCode": "1909511"    
+}
+
+--------------------------------------------------------
+Hescom-FreePowerSupplyRebateData:
+
+{
+    "customer_id": "2589599",
+    "YearMonth": "2022-12",
+    "ClientSecretCode": "1909511"    
+}
+
+--------------------------------------------------------
+Bescom-FreePowerSupplyRebateData:
+
+{
+    "customer_id": "1011312222",
+    "YearMonth": "2022-12",
+    "ClientSecretCode": "1909511"    
+}
+
+--------------------------------------------------------
+
+Mescom-Billing:
+
+{
+    "customer_id": "1011312222",
+    "YearMonth": "2022-12",
+    "ClientSecretCode": "1909511"
+}
+
+--------------------------------------------------------

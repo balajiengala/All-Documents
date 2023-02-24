@@ -1,0 +1,26 @@
+Exposing-Feilds: 
+Based on the feilds assosciated to the Particular client the feilds are Exposed :- version: V1 DataWeave Script Snippet
+
+%dw 2.0
+output application/json skipNullOn="everywhere"
+var APiResponse = vars.APiResponse
+---
+{
+    StatusCode: APiResponse.StatusCode,
+    StatusText: APiResponse.StatusText,
+    Response_ID: APiResponse.Response_ID,
+    Request_ID: APiResponse.Request_ID,
+    ResultDataList: [
+        {
+            "Resident_ID": if(((payload."FeildList" contains "Resident_ID")  as String) == "true") APiResponse.ResultDataList[0].Resident_ID else null,
+            "Benf_Name": if(((payload."FeildList" contains "Benf_Name")  as String) == "true") APiResponse.ResultDataList[0].Benf_Name else null,
+            "District_Name": if(((payload."FeildList" contains "District_Name")  as String) == "true") APiResponse.ResultDataList[0].District_Name else null,
+            "Taluk_Name": if(((payload."FeildList" contains "Taluk_Name")  as String) == "true") APiResponse.ResultDataList[0].Taluk_Name else null,
+            "Dept_Name": if(((payload."FeildList" contains "Dept_Name")  as String) == "true") APiResponse.ResultDataList[0].Dept_Name else null,
+            "Scheme_Name": if(((payload."FeildList" contains "Scheme_Name")  as String) == "true") APiResponse.ResultDataList[0].Scheme_Name else null,
+            "Amount_Received": if(((payload."FeildList" contains "Amount_Received")  as String) == "true") APiResponse.ResultDataList[0].Amount_Received else null,
+            "Payment_Received_Year": if(((payload."FeildList" contains "Payment_Received_Year")  as String) == "true") APiResponse.ResultDataList[0].Payment_Received_Year else null
+
+        }
+    ] 
+}

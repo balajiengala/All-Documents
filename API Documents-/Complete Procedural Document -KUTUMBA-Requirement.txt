@@ -1,0 +1,125 @@
+Kutumba Department Requirement-Decoded and Procedure:-
+
+Concept Behind the Requirement:
+
+Department requested "ESB" to find a way where clients can Access the Api's Based on Avoiding the CodeRedeployement Procedure:::::::::
+
+1.Maintaining a DataBase tables to Store the Clients,update/insert the clients, So that the entire control will be taken by the Department. 
+2.Even Feilds table also maintained to Expose only particular feilds to particular clients.
+
+Requirement Achievement is Done -
+
+Procedure Followed to Achieve the Scenario:
+
+-> Created Table esb_Schema.Clients where it holds the 
+   1.Client-Codes
+   2.StartTime
+   3.EndTime
+   4.APICodes(Which Api's need to be provided to which-Client)
+
+-> Created Table esb_Schema.ApiMaster where it holds the APInames and API-Id's.
+-> Created Table esb_Schema.datafeilds where it holds the DataFeilds of one Api "GetSchemes API".
+
+The Api Flow is Planned in Such a Way that...
+
+#.Client need to be validated:
+
+ The ClientCode which is Coming inside the Flow is captured first, and sent to the Validation. The clientcode entering into API-Flow  gets checked in the Database first, which means if that client exists in the database then the flow should continue. Else there will be a Error, The Client-Secret provided is Invalid.
+
+#.Time Validation:
+
+There will be  StartTime and Endtime in the Table. The now() time gets Compared with the DataweaveScript. If the Validation is true, the flow continues orelse a error will be raised Saying "UN-Permitted-TimeIntervals".
+timevalidation-dataweave Script:
+%dw 2.0
+var startTime = payload.StartTime as Time
+var endTime = payload.EndTime as Time
+fun validate(time: Time) =
+  (((time - startTime) as Number > 0) and ((endTime - time) as Number > 0))
+output application/json  
+---
+{
+  validation: validate((now() >> "IST") [11 to 18] as Time),
+  startTime: startTime ,
+  endTime: endTime ,
+  IST: (now() >> "IST") [11 to 18],
+  istastime: (now() >> "IST") [11 to 18] as Time
+}
+__________________________________________________________
+
+In the Above Dw Code the now time gets splitted as 00:00:00Z and then gets validated,,,The result will be True or False.If true the flow continues.If it's false then as mentioned above the error is Raised...
+
+#.Client and API validation:
+
+This Step deals with the Stored-Variable APIID from the esb_Schema.Clients in which it has APiid's Assosciated with the particlar client and the ApiId from the esb_Schema.ApiMaster table[for this a select query is fired with the Api-name which returns the APIid into the flow]. Now if the Api-id matches with the API'ds then the flow continues orelse error is raised.
+%dw 2.0
+output application/json
+---
+{
+"validator": (((vars.APIID splitBy  ",")[0 to -1]) contains vars.CapturedDataBaseAPIID)as String
+}
+____________________________________________________________
+
+The above logic splits the APIID forms an Array ....And the comparison be like, if the Api-id exist in the Array then the output is True the flow continues or else if output is False the flow will Raise the Error that "The Client Has No Permission to Invoke the API."
+
+#.Api Invoking Will be done and goes various Data Decryption Procedures and final step will be Feilds exposure.
+
+#.Feilds_Exposure:
+
+A Table esb_Schema.datafeilds is created for each APi, to expose which feilds need to be exposed for which client
+refer the table for the reference.
+
+Based on the clientId the Assosciated feilds for that particular client is allowed to get into the flow and 
+the below logic is applied to split and convert the feilds into an Array
+
+%dw 2.0
+output application/json
+---
+{
+	"Client_id-DB": payload.ClientId reduce $,
+	"FeildList": ((payload.OutputFeilds reduce $)splitBy ",")[0 to -1] 
+}
+
+____________________________________________________________________
+
+Finally a Feild Exposure Control logic is written like this to expose if it exist for that particular client
+
+%dw 2.0
+output application/json skipNullOn="everywhere"
+var APiResponse = vars.APiResponse
+---
+{
+    StatusCode: APiResponse.StatusCode,
+    StatusText: APiResponse.StatusText,
+    Response_ID: APiResponse.Response_ID,
+    Request_ID: APiResponse.Request_ID,
+    ResultDataList: [
+        {
+            "Resident_ID": if(((payload."FeildList" contains "Resident_ID")  as String) == "true") APiResponse.ResultDataList[0].Resident_ID else null,
+            "Benf_Name": if(((payload."FeildList" contains "Benf_Name")  as String) == "true") APiResponse.ResultDataList[0].Benf_Name else null,
+            "District_Name": if(((payload."FeildList" contains "District_Name")  as String) == "true") APiResponse.ResultDataList[0].District_Name else null,
+            "Taluk_Name": if(((payload."FeildList" contains "Taluk_Name")  as String) == "true") APiResponse.ResultDataList[0].Taluk_Name else null,
+            "Dept_Name": if(((payload."FeildList" contains "Dept_Name")  as String) == "true") APiResponse.ResultDataList[0].Dept_Name else null,
+            "Scheme_Name": if(((payload."FeildList" contains "Scheme_Name")  as String) == "true") APiResponse.ResultDataList[0].Scheme_Name else null,
+            "Amount_Received": if(((payload."FeildList" contains "Amount_Received")  as String) == "true") APiResponse.ResultDataList[0].Amount_Received else null,
+            "Payment_Received_Year": if(((payload."FeildList" contains "Payment_Received_Year")  as String) == "true") APiResponse.ResultDataList[0].Payment_Received_Year else null
+
+        }
+    ] 
+}
+
+
+---------------------------------------------------
+
+Effective Error handling is done at each level of validation process:refer the APi's implemented
+Now entered clients Alone can make use of the Api's effectively and also we can restrict the Access to particular client whenever necessary.
+
+Refer this Text File for the Future use case.
+
+ 
+
+
+
+
+
+
+

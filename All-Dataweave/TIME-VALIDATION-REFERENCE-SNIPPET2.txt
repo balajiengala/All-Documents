@@ -1,0 +1,16 @@
+%dw 2.0
+var startTime = payload.StartTime as Time
+var endTime = payload.EndTime as Time
+
+fun validate(time: Time) =
+  (((time - startTime) as Number > 0) and ((endTime - time) as Number > 0))
+output application/json  
+---
+{
+  validation: validate((now() >> "IST") [11 to 18] as Time),
+  startTime: startTime ,
+  endTime: endTime ,
+  IST: (now() >> "IST") [11 to 18],
+  istastime: (now() >> "IST") [11 to 18] as Time
+
+}

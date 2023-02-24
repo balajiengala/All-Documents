@@ -1,0 +1,5 @@
+%dw 2.0
+import java!com::fivestar::crypto::Encrypt
+output application/java
+---
+Encrypt::encrypt(write(payload ,"application/java"))

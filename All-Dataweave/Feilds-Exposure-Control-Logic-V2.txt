@@ -1,0 +1,40 @@
+Exposing-Feilds: 
+Based on the feilds assosciated to the Particular client the feilds are Exposed :- version: V2 DataWeave Script Snippet
+In this Script, i have used a Custom defined function to expose and hide the Feilds.
+
+
+Dw Script:
+
+
+%dw 2.0
+output application/json skipNullOn="everywhere"
+var APiResponse = vars.APiResponse
+fun check(respData)= if((respData == "Resident_ID") and (payload.FeildList contains "Resident_ID")) (APiResponse.ResultDataList reduce $).Resident_ID 
+else if((respData == "Benf_Name") and (payload.FeildList contains "Benf_Name")) (APiResponse.ResultDataList reduce $).Benf_Name 
+else if((respData == "District_Name") and (payload.FeildList contains "District_Name")) (APiResponse.ResultDataList reduce $).District_Name 
+else if((respData == "Taluk_Name") and (payload.FeildList contains "Taluk_Name")) (APiResponse.ResultDataList reduce $).Taluk_Name 
+else if((respData == "Dept_Name") and (payload.FeildList contains "Dept_Name")) (APiResponse.ResultDataList reduce $).Dept_Name 
+else if((respData == "Scheme_Name") and (payload.FeildList contains "Scheme_Name")) (APiResponse.ResultDataList reduce $).Scheme_Name 
+else if((respData == "Amount_Received") and (payload.FeildList contains "Amount_Received")) (APiResponse.ResultDataList reduce $).Amount_Received 
+else if((respData == "Payment_Received_Year") and (payload.FeildList contains "Payment_Received_Year")) (APiResponse.ResultDataList reduce $).Payment_Received_Year 
+else null
+---
+{
+    StatusCode: APiResponse.StatusCode,
+    StatusText: APiResponse.StatusText,
+    Response_ID: APiResponse.Response_ID,
+    Request_ID: APiResponse.Request_ID,
+    ResultDataList: [
+        {
+            "Resident_ID": check("Resident_ID"),
+            "Benf_Name": check("Benf_Name"),
+            "District_Name": check("District_Name"),
+            "Taluk_Name": check("Taluk_Name"),
+            "Dept_Name": check("Dept_Name"),
+            "Scheme_Name": check("Scheme_Name"),
+            "Amount_Received": check("Amount_Received"),
+            "Payment_Received_Year": check("Payment_Received_Year")
+
+        }
+    ] 
+}

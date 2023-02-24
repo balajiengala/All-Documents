@@ -1,0 +1,31 @@
+This Document will share the details about SAP module usage in the Anypoint Studio:
+
+By default there won't be any SAP related connectors in the mulePalette,
+we have have to import iy from the Exchange::
+
+Based on the usage purpose we can make use of the Functional Services of SAP module.
+
+If we want to connect with the SAP services the SAP team will provide the Necessary Configurations
+
+the mandatory Configuration for the connector are:
+
+1. Username:
+2. Password:
+3. SapSystem Number:
+4. Sap ClientId:
+5. Application server host: 
+
+
+Drag and Drop the Connector-> Click on Add "+" and configure all the above Details
+In the General-: mention the Funtion Name which you want u want to use.
+
+
+And now For the SAP systems to communicate the Data will be shared between the systems in the Form of "IDoc" which means the internal 
+Document.
+And Also for the External Systems to communicate the Data to SAP systems the Data should be in IDoc format which is An Xml format Document.
+
+Drop the Transform message infront of  the SAP connector and then based on the function the inputs need to be fetched from the Source Syestems 
+and data mapping need to be done for the Target(SAP) Systems.
+
+
+This is the Overview of the SAP connector....And Usage
